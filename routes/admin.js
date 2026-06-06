@@ -46,7 +46,7 @@ router.get('/stats', (req, res) => {
 router.get('/products', (req, res) => {
   const { search = '', category = '' } = req.query;
   let sql = `
-    SELECT p.*, s.vendor_name, s.city
+    SELECT p.*, s.vendor_name, s.city, s.is_verified
     FROM products p LEFT JOIN stands s ON p.stand_id = s.id
     WHERE 1=1
   `;
@@ -71,11 +71,12 @@ router.put('/products/:id', (req, res) => {
       if (err || !existing) return res.status(404).json({ error: 'Product not found.' });
       const updates = [];
       const vals    = [];
-      if (product_name) { updates.push('product_name = ?'); vals.push(product_name.trim()); }
-      if (price_cfa)    { updates.push('price_cfa = ?');    vals.push(parseFloat(price_cfa)); }
-      if (category)     { updates.push('category = ?');     vals.push(category); }
-      if (image_path)   { updates.push('image_path = ?');   vals.push(image_path); }
-      if (video_path)   { updates.push('video_path = ?');   vals.push(video_path); }
+      if (product_name)          { updates.push('product_name = ?');  vals.push(product_name.trim()); }
+      if (price_cfa)             { updates.push('price_cfa = ?');     vals.push(parseFloat(price_cfa)); }
+      if (category)              { updates.push('category = ?');      vals.push(category); }
+      if (req.body.description !== undefined) { updates.push('description = ?'); vals.push(req.body.description || null); }
+      if (image_path)            { updates.push('image_path = ?');    vals.push(image_path); }
+      if (video_path)            { updates.push('video_path = ?');    vals.push(video_path); }
       if (!updates.length) return res.json({ message: 'Nothing to update.' });
       vals.push(req.params.id);
       db.run(`UPDATE products SET ${updates.join(', ')} WHERE id = ?`, vals, function (err2) {
@@ -164,6 +165,26 @@ router.get('/stands', (req, res) => {
   });
 });
 
+router.put('/stands/:id/edit', (req, res) => {
+  const { vendor_name, phone_number, stand_description, city } = req.body;
+  db.get('SELECT * FROM stands WHERE id = ?', [req.params.id], (err, stand) => {
+    if (err || !stand) return res.status(404).json({ error: 'Stand not found.' });
+    db.run(
+      `UPDATE stands SET
+        vendor_name       = COALESCE(?, vendor_name),
+        phone_number      = COALESCE(?, phone_number),
+        stand_description = COALESCE(?, stand_description),
+        city              = COALESCE(?, city)
+       WHERE id = ?`,
+      [vendor_name || null, phone_number || null, stand_description ?? null, city || null, req.params.id],
+      function (err2) {
+        if (err2) return res.status(500).json({ error: err2.message });
+        res.json({ message: 'Stand updated.' });
+      }
+    );
+  });
+});
+
 router.put('/stands/:id/verify', (req, res) => {
   const verified = req.body.verified ? 1 : 0;
   db.run('UPDATE stands SET is_verified = ? WHERE id = ?', [verified, req.params.id], function (err) {
@@ -203,6 +224,16 @@ router.delete('/users/:id', (req, res) => {
 });
 
 // ── Orders ──────────────────────────────────────────────────────────────
+router.put('/orders/:id/status', (req, res) => {
+  const { status } = req.body;
+  const allowed = ['pending', 'confirmed', 'delivered', 'cancelled'];
+  if (!allowed.includes(status)) return res.status(400).json({ error: 'Invalid status.' });
+  db.run('UPDATE orders SET status = ? WHERE id = ?', [status, req.params.id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Status updated.' });
+  });
+});
+
 router.get('/orders', (req, res) => {
   const sql = `
     SELECT o.*, p.product_name, p.price_cfa, s.vendor_name, s.city
@@ -210,7 +241,7 @@ router.get('/orders', (req, res) => {
     JOIN products p ON o.product_id = p.id
     JOIN stands   s ON p.stand_id   = s.id
     ORDER BY o.order_date DESC
-    LIMIT 100
+    LIMIT 200
   `;
   db.all(sql, [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
