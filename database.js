@@ -77,8 +77,20 @@ db.serialize(() => {
     "ALTER TABLE stands ADD COLUMN is_verified INTEGER DEFAULT 0",
     "ALTER TABLE products ADD COLUMN description TEXT",
     "ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'pending'",
+    "ALTER TABLE stands ADD COLUMN availability TEXT DEFAULT 'open'",
   ];
   migrations.forEach((sql) => db.run(sql, () => {}));
+
+  db.run(`CREATE TABLE IF NOT EXISTS price_reports (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_name   TEXT NOT NULL,
+    price_cfa   REAL NOT NULL,
+    unit        TEXT NOT NULL DEFAULT 'kg',
+    market_name TEXT,
+    city        TEXT NOT NULL DEFAULT 'Douala',
+    reporter    TEXT,
+    reported_at TEXT DEFAULT (datetime('now'))
+  )`);
 
   if (process.env.NODE_ENV !== 'test') console.log('Database tables initialized.');
 });

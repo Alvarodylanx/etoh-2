@@ -108,6 +108,26 @@ const T = {
 
     // Admin
     verifyStand: '✓ Verify', unverifyStand: '✗ Remove',
+
+    // Availability
+    standStatus: 'Stand Status',
+    availOpen: 'Open Now', availAway: 'Back Soon', availClosed: 'Closed',
+
+    // Prix du Marché
+    priceBoard: "Prix du Marché",
+    priceBoardTitle: "Community Market Prices",
+    priceBoardSubtitle: "Real prices submitted today by buyers across Cameroon",
+    submitPrice: "Submit a Price",
+    submitPriceTitle: "What did you pay today?",
+    itemLabel: "Item", priceLabel: "Price (CFA)", unitLabel: "Unit",
+    marketNameLabel: "Market Name", cityLabel: "City",
+    reporterLabel: "Your first name (optional)",
+    submitBtn: "Submit Price", submittingBtn: "Submitting…",
+    todayReports: "reports today",
+    noReports: "No reports yet today. Be the first!",
+    minPrice: "Min", avgPrice: "Avg", maxPrice: "Max",
+    lastReport: "Last reported",
+    priceBoardNav: "Prix du Marché",
   },
 
   fr: {
@@ -217,6 +237,26 @@ const T = {
 
     // Admin
     verifyStand: '✓ Certifier', unverifyStand: '✗ Retirer',
+
+    // Availability
+    standStatus: 'Statut du Stand',
+    availOpen: 'Ouvert', availAway: 'Revient bientôt', availClosed: 'Fermé',
+
+    // Prix du Marché
+    priceBoard: "Prix du Marché",
+    priceBoardTitle: "Prix du Marché Communautaire",
+    priceBoardSubtitle: "Prix réels soumis aujourd'hui par des acheteurs à travers le Cameroun",
+    submitPrice: "Soumettre un Prix",
+    submitPriceTitle: "Combien avez-vous payé aujourd'hui ?",
+    itemLabel: "Produit", priceLabel: "Prix (CFA)", unitLabel: "Unité",
+    marketNameLabel: "Nom du Marché", cityLabel: "Ville",
+    reporterLabel: "Votre prénom (optionnel)",
+    submitBtn: "Soumettre", submittingBtn: "Envoi…",
+    todayReports: "signalements aujourd'hui",
+    noReports: "Aucun signalement aujourd'hui. Soyez le premier !",
+    minPrice: "Min", avgPrice: "Moy", maxPrice: "Max",
+    lastReport: "Dernier signalement",
+    priceBoardNav: "Prix du Marché",
   },
 };
 

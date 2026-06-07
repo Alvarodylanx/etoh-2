@@ -4,6 +4,7 @@ import { getStands, getProducts } from '../api';
 import { CATEGORIES, getCategoryMeta } from '../constants/categories';
 import { useLang } from '../context/LanguageContext';
 import ProductCard from '../components/ProductCard';
+import { AvailabilityBadge } from '../components/AvailabilityBadge';
 
 const REGIONS = ['Douala', 'Yaoundé', 'Bamenda', 'Buea', 'Bafoussam', 'Kribi', 'Limbe', 'Ngaoundéré'];
 
@@ -156,9 +157,12 @@ export default function Home() {
                 <Link key={s.id} to={`/stands/${s.id}`} className="card stand-card">
                   <div className="stand-banner">🏪</div>
                   <div className="stand-info">
-                    <div className="stand-name">
+                    <div className="stand-name" style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       {s.vendor_name}
-                      {s.is_verified ? <span className="vendor-verified" style={{ marginLeft: 6 }}>✓ {t('trustedVendor')}</span> : null}
+                      {s.is_verified ? <span className="vendor-verified">✓ {t('trustedVendor')}</span> : null}
+                    </div>
+                    <div style={{ margin: '4px 0 6px' }}>
+                      <AvailabilityBadge availability={s.availability} />
                     </div>
                     <div className="stand-desc">{s.stand_description || 'Welcome to my stand!'}</div>
                     <div className="stand-meta">

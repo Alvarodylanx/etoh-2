@@ -4,6 +4,7 @@ import { getStand, deleteProduct } from '../api';
 import { useAuth } from '../context/AuthContext';
 import { useLang } from '../context/LanguageContext';
 import SafetyGate from '../components/SafetyGate';
+import { AvailabilityBadge, AvailabilityToggle } from '../components/AvailabilityBadge';
 import WhatsAppButton from '../components/WhatsAppButton';
 import ProductCard from '../components/ProductCard';
 
@@ -17,9 +18,13 @@ export default function StandDetail() {
   const [showWA, setShowWA]       = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [error, setError]         = useState('');
+  const [avail, setAvail]         = useState('open'); // initialized from data below
 
   useEffect(() => {
-    getStand(id).then(r => setData(r.data)).catch(() => setError('Stand not found.')).finally(() => setLoading(false));
+    getStand(id)
+      .then(r => { setData(r.data); setAvail(r.data.stand?.availability || 'open'); })
+      .catch(() => setError('Stand not found.'))
+      .finally(() => setLoading(false));
   }, [id]);
 
   async function handleDeleteProduct(product) {
@@ -54,9 +59,10 @@ export default function StandDetail() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '6px' }}>
               <h1 style={{ fontSize: '1.6rem', fontWeight: 900 }}>{stand.vendor_name}</h1>
               {isOwner && <span className="owner-badge">{t('yourStand')}</span>}
-              {stand.is_verified ? (
-                <span className="vendor-verified">🦁 {t('trustedVendor')}</span>
-              ) : null}
+              {stand.is_verified ? <span className="vendor-verified">🦁 {t('trustedVendor')}</span> : null}
+            </div>
+            <div style={{ marginBottom: 10 }}>
+              <AvailabilityBadge availability={avail} size="lg" />
             </div>
             <p style={{ color: 'var(--text-muted)', marginBottom: '12px' }}>{stand.stand_description || 'Welcome to my ETOH stand!'}</p>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -74,6 +80,9 @@ export default function StandDetail() {
               <>
                 <Link to={`/stands/${id}/add-product`} className="btn btn-primary btn-sm" style={{ textAlign: 'center' }}>{t('addProduct')}</Link>
                 <Link to={`/stands/${id}/edit`} className="btn btn-outline btn-sm" style={{ textAlign: 'center' }}>{t('editStand')}</Link>
+                <div style={{ marginTop: 4 }}>
+                  <AvailabilityToggle standId={id} current={avail} onChange={setAvail} />
+                </div>
               </>
             )}
           </div>

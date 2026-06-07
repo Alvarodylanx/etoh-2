@@ -69,6 +69,20 @@ router.put('/:id', requireAuth, (req, res) => {
   });
 });
 
+router.put('/:id/availability', requireAuth, (req, res) => {
+  const { availability } = req.body;
+  const allowed = ['open', 'away', 'closed'];
+  if (!allowed.includes(availability)) return res.status(400).json({ error: 'Invalid availability value.' });
+  db.get('SELECT * FROM stands WHERE id = ?', [req.params.id], (err, stand) => {
+    if (err || !stand) return res.status(404).json({ error: 'Stand not found.' });
+    if (stand.user_id !== req.user.id) return res.status(403).json({ error: 'You do not own this stand.' });
+    db.run('UPDATE stands SET availability = ? WHERE id = ?', [availability, req.params.id], function (err2) {
+      if (err2) return res.status(500).json({ error: err2.message });
+      res.json({ availability });
+    });
+  });
+});
+
 router.delete('/:id', requireAuth, (req, res) => {
   db.get('SELECT * FROM stands WHERE id = ?', [req.params.id], (err, stand) => {
     if (err) return res.status(500).json({ error: err.message });

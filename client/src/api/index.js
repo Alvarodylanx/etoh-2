@@ -18,7 +18,8 @@ export const getMyStands = ()     => api.get('/stands/mine');
 export const getStand    = (id)   => api.get(`/stands/${id}`);
 export const createStand = (data) => api.post('/stands', data);
 export const updateStand = (id, data) => api.put(`/stands/${id}`, data);
-export const deleteStand = (id)   => api.delete(`/stands/${id}`);
+export const deleteStand          = (id)           => api.delete(`/stands/${id}`);
+export const setAvailability      = (id, availability) => api.put(`/stands/${id}/availability`, { availability });
 
 export const getProducts  = ()     => api.get('/products');
 export const getProduct   = (id)   => api.get(`/products/${id}`);
@@ -34,3 +35,7 @@ export const deletePost  = (id)   => api.delete(`/posts/${id}`);
 export const likePost    = (id)   => api.post(`/posts/${id}/like`);
 
 export const chatWithAI = (message) => api.post('/ai/chat', { message });
+
+export const getPriceItems   = ()     => api.get('/prices/items');
+export const getPrices       = (city) => api.get('/prices' + (city ? `?city=${encodeURIComponent(city)}` : ''));
+export const submitPrice     = (data) => api.post('/prices', data);
