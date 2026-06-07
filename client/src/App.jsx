@@ -17,6 +17,7 @@ import EditStand from './pages/EditStand';
 import Reels from './pages/Reels';
 import Profile from './pages/Profile';
 import PrixDuMarche from './pages/PrixDuMarche';
+import JeCherche from './pages/JeCherche';
 
 function PublicApp() {
   return (
@@ -29,6 +30,7 @@ function PublicApp() {
           <Route path="/register"      element={<Register />} />
           <Route path="/market-buzz"    element={<Reels />} />
           <Route path="/prix-du-marche" element={<PrixDuMarche />} />
+          <Route path="/je-cherche"     element={<JeCherche />} />
           <Route path="/stands/:id"    element={<StandDetail />} />
           <Route path="/products/:id"  element={<ProductDetail />} />
           <Route path="/create-stand"  element={<ProtectedRoute><CreateStand /></ProtectedRoute>} />

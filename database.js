@@ -81,6 +81,17 @@ db.serialize(() => {
   ];
   migrations.forEach((sql) => db.run(sql, () => {}));
 
+  db.run(`CREATE TABLE IF NOT EXISTS wanted_posts (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    buyer_name  TEXT NOT NULL,
+    description TEXT NOT NULL,
+    quantity    TEXT,
+    city        TEXT NOT NULL,
+    whatsapp    TEXT NOT NULL,
+    created_at  TEXT DEFAULT (datetime('now')),
+    expires_at  TEXT DEFAULT (datetime('now', '+7 days'))
+  )`);
+
   db.run(`CREATE TABLE IF NOT EXISTS price_reports (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     item_name   TEXT NOT NULL,

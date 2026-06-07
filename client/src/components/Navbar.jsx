@@ -19,6 +19,7 @@ export default function Navbar() {
         <NavLink to="/" end className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>{t('market')}</NavLink>
         <NavLink to="/market-buzz" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>{t('buzz')}</NavLink>
         <NavLink to="/prix-du-marche" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>🏷️ {t('priceBoardNav')}</NavLink>
+        <NavLink to="/je-cherche" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>🔍 {lang === 'fr' ? 'Je Cherche' : 'Looking For'}</NavLink>
 
         {user ? (
           <>

@@ -508,6 +508,72 @@ body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var
 }
 .reels-empty h3 { color:white; font-size:1.3rem; margin-bottom:8px; }
 
+/* ── Bendskin Delivery Button ────────────────────────── */
+.bendskin-wrap { margin-top:14px; }
+.bendskin-btn {
+  width:100%; padding:11px;
+  background:linear-gradient(135deg,#f59e0b,#d97706);
+  color:white; border:none; border-radius:var(--radius-sm);
+  font-weight:800; font-size:.95rem; cursor:pointer;
+  transition:all .2s; font-family:inherit;
+  box-shadow:0 3px 10px rgba(217,119,6,.35);
+}
+.bendskin-btn:hover { transform:translateY(-1px); box-shadow:0 5px 16px rgba(217,119,6,.45); }
+.bendskin-panel {
+  margin-top:10px; background:#fffbeb;
+  border:2px solid #fcd34d; border-radius:var(--radius-sm);
+  padding:14px; animation:fadeInUp .25s ease;
+}
+.bendskin-panel-title { font-weight:700; font-size:.88rem; margin-bottom:10px; color:#92400e; }
+.bendskin-send {
+  display:block; text-align:center;
+  background:var(--whatsapp); color:white;
+  padding:10px; border-radius:var(--radius-sm);
+  font-weight:700; font-size:.9rem; text-decoration:none;
+  transition:background .15s;
+}
+.bendskin-send:hover { background:var(--whatsapp-dark); }
+.bendskin-hint { font-size:.75rem; color:var(--text-muted); text-align:center; margin-top:7px; }
+
+/* ── Je Cherche ──────────────────────────────────────── */
+.jc-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; margin-bottom:24px;
+}
+.jc-form-wrap {
+  background:#f0fdf4; border:2px solid #86efac;
+  border-radius:var(--radius); padding:22px; margin-bottom:24px;
+  animation:fadeInUp .3s ease;
+}
+.jc-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:18px; margin-bottom:32px;
+}
+.jc-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px;
+  box-shadow:var(--shadow); transition:transform .2s, box-shadow .2s;
+}
+.jc-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+.jc-card-top {
+  display:flex; align-items:center; gap:12px; margin-bottom:14px;
+}
+.jc-avatar {
+  width:42px; height:42px; border-radius:50%;
+  background:var(--green); color:white;
+  font-weight:900; font-size:1.1rem;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.jc-buyer   { font-weight:800; font-size:.95rem; }
+.jc-city    { font-size:.78rem; color:var(--text-muted); margin-top:1px; }
+.jc-time    { margin-left:auto; font-size:.72rem; color:var(--text-muted); white-space:nowrap; }
+.jc-looking { font-size:.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; }
+.jc-desc    { font-size:.95rem; font-weight:600; color:var(--text); line-height:1.4; margin-bottom:10px; }
+.jc-qty     { font-size:.82rem; color:var(--text-muted); margin-bottom:12px; }
+.jc-footer  { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:12px; margin-top:4px; }
+.jc-expiry  { font-size:.72rem; color:var(--text-muted); font-weight:600; }
+
 /* ── Prix du Marché ─────────────────────────────────── */
 .prix-header {
   display:flex; align-items:flex-start; justify-content:space-between;
