@@ -6,6 +6,7 @@ import { useLang } from '../context/LanguageContext';
 import { getCategoryMeta } from '../constants/categories';
 import SafetyGate from '../components/SafetyGate';
 import WhatsAppButton from '../components/WhatsAppButton';
+import BendskinButton from '../components/BendskinButton';
 
 const CITIES = ['Douala', 'Yaoundé', 'Bamenda', 'Buea', 'Bafoussam', 'Kribi', 'Limbe', 'Ngaoundéré'];
 
@@ -175,6 +176,14 @@ export default function ProductDetail() {
               <span className="wa-logo">📱</span> {t('chatWhatsApp')}
             </button>
             <p style={{ fontSize: '.76rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '8px' }}>{t('safetyNote')}</p>
+
+            {/* Bendskin Delivery */}
+            <BendskinButton
+              productName={product.product_name}
+              vendorName={product.vendor_name}
+              priceCfa={product.price_cfa}
+              city={product.city || ''}
+            />
 
             {/* Bargain Calculator */}
             <BargainCalculator price={Number(product.price_cfa)} productName={product.product_name} t={t} />
