@@ -57,10 +57,10 @@ router.put('/:id', requireAuth, (req, res) => {
     if (!stand) return res.status(404).json({ error: 'Stand not found.' });
     if (stand.user_id !== req.user.id) return res.status(403).json({ error: 'You do not own this stand.' });
 
-    const { vendor_name, phone_number, stand_description } = req.body;
+    const { vendor_name, phone_number, stand_description, city } = req.body;
     db.run(
-      'UPDATE stands SET vendor_name = ?, phone_number = ?, stand_description = ? WHERE id = ?',
-      [vendor_name || stand.vendor_name, phone_number || stand.phone_number, stand_description ?? stand.stand_description, req.params.id],
+      'UPDATE stands SET vendor_name = ?, phone_number = ?, stand_description = ?, city = ? WHERE id = ?',
+      [vendor_name || stand.vendor_name, phone_number || stand.phone_number, stand_description ?? stand.stand_description, city || stand.city, req.params.id],
       function (err2) {
         if (err2) return res.status(500).json({ error: err2.message });
         res.json({ message: 'Stand updated.' });

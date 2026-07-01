@@ -27,7 +27,9 @@ export const createProduct = (fd)  => api.post('/products', fd, { headers: { 'Co
 export const deleteProduct = (id)  => api.delete(`/products/${id}`);
 export const uploadVoice   = (pid, fd) => api.post(`/products/${pid}/voice`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
 
-export const placeOrder = (data) => api.post('/orders', data);
+export const placeOrder        = (data) => api.post('/orders', data);
+export const getMyOrders       = ()     => api.get('/orders/mine');
+export const updateOrderStatus = (id, status) => api.put(`/orders/${id}/status`, { status });
 
 export const getPosts    = ()     => api.get('/posts');
 export const createPost  = (fd)   => api.post('/posts', fd, { headers: { 'Content-Type': 'multipart/form-data' } });

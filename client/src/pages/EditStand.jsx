@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getStand, updateStand } from '../api';
 
+const CITIES = ['Douala', 'Yaoundé', 'Bamenda', 'Buea', 'Bafoussam', 'Kribi', 'Limbe', 'Ngaoundéré'];
+
 export default function EditStand() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ vendor_name: '', phone_number: '', stand_description: '' });
+  const [form, setForm] = useState({ vendor_name: '', phone_number: '', stand_description: '', city: 'Douala' });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -13,7 +15,7 @@ export default function EditStand() {
   useEffect(() => {
     getStand(id).then((res) => {
       const { stand } = res.data;
-      setForm({ vendor_name: stand.vendor_name, phone_number: stand.phone_number, stand_description: stand.stand_description || '' });
+      setForm({ vendor_name: stand.vendor_name, phone_number: stand.phone_number, stand_description: stand.stand_description || '', city: stand.city || 'Douala' });
     }).catch(() => setError('Failed to load stand.')).finally(() => setLoading(false));
   }, [id]);
 
@@ -53,6 +55,12 @@ export default function EditStand() {
           <div className="form-group">
             <label className="form-label">Mobile Money Phone Number *</label>
             <input className="form-input" name="phone_number" value={form.phone_number} onChange={onChange} required />
+          </div>
+          <div className="form-group">
+            <label className="form-label">City *</label>
+            <select className="form-select" name="city" value={form.city} onChange={onChange} required>
+              {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
           </div>
           <div className="form-group">
             <label className="form-label">Stand Description</label>

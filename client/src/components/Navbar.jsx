@@ -24,6 +24,7 @@ export default function Navbar() {
         {user ? (
           <>
             <NavLink to="/my-stands" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>{t('myStands')}</NavLink>
+            <NavLink to="/my-orders" className={({ isActive }) => 'navbar-link' + (isActive ? ' active' : '')}>My Orders</NavLink>
             <div className="user-chip">
               <Link to="/profile" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div className="user-avatar">

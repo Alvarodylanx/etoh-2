@@ -18,6 +18,7 @@ import Reels from './pages/Reels';
 import Profile from './pages/Profile';
 import PrixDuMarche from './pages/PrixDuMarche';
 import JeCherche from './pages/JeCherche';
+import VendorOrders from './pages/VendorOrders';
 
 function PublicApp() {
   return (
@@ -35,6 +36,7 @@ function PublicApp() {
           <Route path="/products/:id"  element={<ProductDetail />} />
           <Route path="/create-stand"  element={<ProtectedRoute><CreateStand /></ProtectedRoute>} />
           <Route path="/my-stands"     element={<ProtectedRoute><MyStands /></ProtectedRoute>} />
+          <Route path="/my-orders"     element={<ProtectedRoute><VendorOrders /></ProtectedRoute>} />
           <Route path="/profile"       element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/stands/:id/edit"             element={<ProtectedRoute><EditStand /></ProtectedRoute>} />
           <Route path="/stands/:standId/add-product" element={<ProtectedRoute><CreateProduct /></ProtectedRoute>} />

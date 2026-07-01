@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { createStand } from '../api';
 
+const CITIES = ['Douala', 'Yaoundé', 'Bamenda', 'Buea', 'Bafoussam', 'Kribi', 'Limbe', 'Ngaoundéré'];
+
 export default function CreateStand() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ vendor_name: '', phone_number: '', stand_description: '' });
+  const [form, setForm] = useState({ vendor_name: '', phone_number: '', stand_description: '', city: 'Douala' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -68,6 +70,13 @@ export default function CreateStand() {
               required
             />
             <div className="form-hint">Buyers will see this after accepting the safety guidelines.</div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">City *</label>
+            <select className="form-select" name="city" value={form.city} onChange={onChange} required>
+              {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
           </div>
 
           <div className="form-group">
