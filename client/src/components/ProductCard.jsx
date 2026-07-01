@@ -25,7 +25,7 @@ export default function ProductCard({ product }) {
       <div className="card-body">
         <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap', marginBottom: '6px' }}>
           <span className="cat-badge">{cat.icon} {cat.label}</span>
-          {product.city && <span className="cat-badge" style={{ background: '#EFF6FF', color: '#1D4ED8' }}>📍 {product.city}</span>}
+          {product.city && <span className="cat-badge" style={{ background: '#EFF6FF', color: '#1D4ED8' }}>{product.city}</span>}
         </div>
 
         <div className="card-title">{product.product_name}</div>
@@ -36,8 +36,8 @@ export default function ProductCard({ product }) {
         <div className="card-price">{fmtPrice(product.price_cfa)}</div>
 
         <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          {product.audio_voice_path && <span style={{ fontSize: '.72rem', background: '#FEF3C7', color: '#92400E', padding: '2px 8px', borderRadius: '999px' }}>🎙️ Voice</span>}
-          {product.video_path       && <span style={{ fontSize: '.72rem', background: '#DCFCE7', color: '#166534', padding: '2px 8px', borderRadius: '999px' }}>🎬 Video</span>}
+          {product.audio_voice_path && <span style={{ fontSize: '.72rem', background: '#FEF3C7', color: '#92400E', padding: '2px 8px', borderRadius: '999px' }}>Voice</span>}
+          {product.video_path       && <span style={{ fontSize: '.72rem', background: '#DCFCE7', color: '#166534', padding: '2px 8px', borderRadius: '999px' }}>Video</span>}
         </div>
       </div>
     </Link>

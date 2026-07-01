@@ -29,19 +29,18 @@ export default function WhatsAppButton({ phone, productName, vendorName, onClose
   return (
     <div className="wa-popup-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="wa-popup">
-        <div className="wa-popup-logo">💬</div>
+        <div className="wa-popup-logo" style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--whatsapp-dark)' }}>WhatsApp</div>
         <div className="wa-popup-title">Contact via WhatsApp</div>
         <div className="wa-popup-sub">
           A message about{' '}
           <strong>{productName || vendorName}</strong> will be pre-filled for you.
         </div>
 
-        <div className="wa-popup-number">📞 {phone}</div>
+        <div className="wa-popup-number">{phone}</div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {waUrl ? (
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="whatsapp-btn">
-              <span className="wa-logo">📱</span>
               Open WhatsApp Chat
             </a>
           ) : (
@@ -52,7 +51,7 @@ export default function WhatsAppButton({ phone, productName, vendorName, onClose
             className="btn btn-outline btn-full"
             onClick={copyNumber}
           >
-            {copied ? '✅ Copied!' : '📋 Copy Number'}
+            {copied ? 'Copied!' : 'Copy Number'}
           </button>
 
           <button

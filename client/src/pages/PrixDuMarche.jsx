@@ -4,29 +4,15 @@ import { useLang } from '../context/LanguageContext';
 
 const CITIES = ['Douala','Yaoundé','Bamenda','Buea','Bafoussam','Kribi','Limbe','Ngaoundéré'];
 
-const ITEM_ICONS = {
-  'Tomates':        '🍅',
-  'Plantains':      '🍌',
-  'Huile de palme': '🫙',
-  'Riz blanc':      '🍚',
-  'Ndolé':          '🥬',
-  'Bœuf':           '🥩',
-  'Poulet entier':  '🍗',
-  'Poisson fumé':   '🐟',
-  'Manioc':         '🌿',
-  'Haricots':       '🫘',
-  'Piment rouge':   '🌶️',
-  'Gombo':          '🥒',
-};
+const ITEM_ICONS = {};
 
 function PriceCard({ item, summary, t }) {
-  const icon = ITEM_ICONS[item.name] || '🛒';
+  const icon = null;
   const s    = summary?.find(r => r.item_name === item.name);
 
   return (
     <div className="prix-card">
       <div className="prix-card-header">
-        <span className="prix-icon">{icon}</span>
         <div>
           <div className="prix-name">{item.name}</div>
           <div className="prix-unit">/ {item.unit}</div>
@@ -103,7 +89,7 @@ export default function PrixDuMarche() {
       {/* Header */}
       <div className="prix-header">
         <div>
-          <h1 className="prix-main-title">🏷️ {t('priceBoardTitle')}</h1>
+          <h1 className="prix-main-title">{t('priceBoardTitle')}</h1>
           <p className="prix-main-sub">{t('priceBoardSubtitle')}</p>
         </div>
         <button className="btn btn-primary" onClick={() => setShowForm(s => !s)}>
@@ -114,14 +100,14 @@ export default function PrixDuMarche() {
       {/* Success banner */}
       {submitted && (
         <div className="alert alert-success" style={{ marginBottom: 20 }}>
-          ✅ Prix soumis ! Merci pour votre contribution. / Price submitted! Thank you.
+          Prix soumis ! Merci pour votre contribution. / Price submitted! Thank you.
         </div>
       )}
 
       {/* Submit form */}
       {showForm && (
         <div className="prix-form-wrap">
-          <div className="prix-form-title">📝 {t('submitPriceTitle')}</div>
+          <div className="prix-form-title">{t('submitPriceTitle')}</div>
           {error && <div className="alert alert-error">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
@@ -129,7 +115,7 @@ export default function PrixDuMarche() {
                 <label className="form-label">{t('itemLabel')} *</label>
                 <select className="form-select" value={form.item_name} onChange={e => setForm(f => ({ ...f, item_name: e.target.value, unit: items.find(i=>i.name===e.target.value)?.unit || 'kg' }))} required>
                   <option value="">-- {t('itemLabel')} --</option>
-                  {items.map(i => <option key={i.name} value={i.name}>{ITEM_ICONS[i.name] || '🛒'} {i.name}</option>)}
+                  {items.map(i => <option key={i.name} value={i.name}>{i.name}</option>)}
                 </select>
               </div>
               <div className="form-group">
@@ -161,9 +147,9 @@ export default function PrixDuMarche() {
       {/* City filter */}
       <div style={{ marginBottom: 20 }}>
         <div className="cat-bar">
-          <button className={`cat-chip ${city === '' ? 'active' : ''}`} onClick={() => setCity('')}>🌍 All Cities</button>
+          <button className={`cat-chip ${city === '' ? 'active' : ''}`} onClick={() => setCity('')}>All Cities</button>
           {CITIES.map(c => (
-            <button key={c} className={`cat-chip ${city === c ? 'active' : ''}`} onClick={() => setCity(c)}>📍 {c}</button>
+            <button key={c} className={`cat-chip ${city === c ? 'active' : ''}`} onClick={() => setCity(c)}>{c}</button>
           ))}
         </div>
       </div>
@@ -177,11 +163,11 @@ export default function PrixDuMarche() {
 
       {/* How it works */}
       <div className="prix-info-box">
-        <div className="prix-info-title">ℹ️ Comment ça marche / How it works</div>
+        <div className="prix-info-title">Comment ça marche / How it works</div>
         <p>
-          🇫🇷 <strong>Participatif :</strong> Chaque achat que vous signalez aide les autres à négocier un juste prix. Les prix se réinitialisent chaque jour.
+          <strong>Participatif :</strong> Chaque achat que vous signalez aide les autres à négocier un juste prix. Les prix se réinitialisent chaque jour.
           <br />
-          🇬🇧 <strong>Community-powered:</strong> Every price you report helps others negotiate fairly. Prices reset daily.
+          <strong>Community-powered:</strong> Every price you report helps others negotiate fairly. Prices reset daily.
         </p>
       </div>
     </div>

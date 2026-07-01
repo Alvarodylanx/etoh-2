@@ -32,11 +32,11 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <div className="auth-logo">🛒</div>
+        <div className="auth-logo" style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--primary)', letterSpacing: '-1px' }}>ETOH</div>
         <h1 className="auth-title">{t('welcomeBack')}</h1>
         <p className="auth-subtitle">{t('loginSubtitle')}</p>
 
-        {error && <div className="alert alert-error">⚠️ {error}</div>}
+        {error && <div className="alert alert-error">{error}</div>}
 
         <form onSubmit={onSubmit}>
           <div className="form-group">

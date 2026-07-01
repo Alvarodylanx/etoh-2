@@ -36,7 +36,7 @@ export default function JeCherche() {
   const fr = lang === 'fr';
 
   const T = {
-    title:       fr ? 'Je Cherche 🔍'                              : "I'm Looking For 🔍",
+    title:       fr ? 'Je Cherche'                                   : "I'm Looking For",
     subtitle:    fr ? 'Postez ce que vous cherchez — les vendeurs vous contacteront directement sur WhatsApp.'
                     : 'Post what you need — vendors will contact you directly on WhatsApp.',
     postBtn:     fr ? '+ Publier une Annonce'                       : '+ Post a Request',
@@ -52,22 +52,22 @@ export default function JeCherche() {
     waPh:        fr ? '6XX XX XX XX'                                : '6XX XX XX XX',
     waHint:      fr ? 'Visible uniquement des vendeurs — ils vous contacteront.'
                     : 'Only visible to vendors — they will contact you.',
-    submitBtn:   fr ? '🔍 Publier ma Recherche'                     : '🔍 Post My Request',
+    submitBtn:   fr ? 'Publier ma Recherche'                          : 'Post My Request',
     submitting:  fr ? 'Publication...'                              : 'Posting...',
     empty:       fr ? 'Aucune annonce pour le moment.'              : 'No requests yet.',
     emptyHint:   fr ? 'Soyez le premier à poster ce que vous cherchez !'
                     : 'Be the first to post what you\'re looking for!',
-    contactBtn:  fr ? '📱 Contacter sur WhatsApp'                   : '📱 Contact on WhatsApp',
+    contactBtn:  fr ? 'Contacter sur WhatsApp'                        : 'Contact on WhatsApp',
     daysLeft:    (d) => fr ? `Expire dans ${d}j`                    : `Expires in ${d}d`,
-    removeBtn:   fr ? '🗑️ Retirer'                                  : '🗑️ Remove',
+    removeBtn:   fr ? 'Retirer'                                       : 'Remove',
     removePrompt:fr ? 'Entrez votre numéro WhatsApp pour supprimer cette annonce :'
                     : 'Enter your WhatsApp number to remove this post:',
     removed:     fr ? 'Annonce retirée.'                            : 'Post removed.',
-    posted:      fr ? '✅ Annonce publiée ! Les vendeurs vont vous contacter.'
-                    : '✅ Request posted! Vendors will contact you.',
+    posted:      fr ? 'Annonce publiée ! Les vendeurs vont vous contacter.'
+                    : 'Request posted! Vendors will contact you.',
     lookingFor:  fr ? 'Recherche'                                   : 'Looking for',
     qty:         fr ? 'Quantité'                                    : 'Quantity',
-    howTitle:    fr ? 'ℹ️ Comment ça marche'                        : 'ℹ️ How it works',
+    howTitle:    fr ? 'Comment ça marche'                             : 'How it works',
     howText:     fr
       ? '1. Postez ce que vous cherchez avec votre numéro WhatsApp.\n2. Les vendeurs voient votre annonce et vous contactent directement.\n3. Négociez et concluez l\'affaire en toute sécurité.\n⏰ Les annonces expirent automatiquement après 7 jours.'
       : '1. Post what you need with your WhatsApp number.\n2. Vendors see your request and contact you directly.\n3. Negotiate and close the deal safely.\n⏰ Posts expire automatically after 7 days.',
@@ -132,7 +132,7 @@ export default function JeCherche() {
       {/* Post form */}
       {showForm && (
         <div className="jc-form-wrap">
-          <div style={{ fontWeight: 800, fontSize: '1rem', marginBottom: 18 }}>📝 {T.formTitle}</div>
+          <div style={{ fontWeight: 800, fontSize: '1rem', marginBottom: 18 }}>{T.formTitle}</div>
           {error && <div className="alert alert-error">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14 }}>
@@ -174,8 +174,8 @@ export default function JeCherche() {
 
       {/* City filter */}
       <div className="cat-bar" style={{ marginBottom: 20 }}>
-        <button className={`cat-chip ${city==='' ? 'active' : ''}`} onClick={() => setCity('')}>🌍 {T.cityFilter}</button>
-        {CITIES.map(c => <button key={c} className={`cat-chip ${city===c ? 'active' : ''}`} onClick={() => setCity(c)}>📍 {c}</button>)}
+        <button className={`cat-chip ${city==='' ? 'active' : ''}`} onClick={() => setCity('')}>{T.cityFilter}</button>
+        {CITIES.map(c => <button key={c} className={`cat-chip ${city===c ? 'active' : ''}`} onClick={() => setCity(c)}>{c}</button>)}
       </div>
 
       {/* Posts grid */}
@@ -183,7 +183,7 @@ export default function JeCherche() {
         <div className="loading-center"><div className="spinner" /></div>
       ) : posts.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🔍</div>
+          <div className="empty-state-icon" style={{ fontSize: '2rem', color: 'var(--border)' }}>◫</div>
           <h3>{T.empty}</h3>
           <p>{T.emptyHint}</p>
           <button className="btn btn-primary" style={{ marginTop:16 }} onClick={() => setShowForm(true)}>{T.postBtn}</button>
@@ -196,16 +196,16 @@ export default function JeCherche() {
                 <div className="jc-avatar">{post.buyer_name.charAt(0).toUpperCase()}</div>
                 <div className="jc-meta">
                   <div className="jc-buyer">{post.buyer_name}</div>
-                  <div className="jc-city">📍 {post.city}</div>
+                  <div className="jc-city">{post.city}</div>
                 </div>
                 <div className="jc-time">{timeAgo(post.created_at)}</div>
               </div>
 
-              <div className="jc-looking">🔍 {T.lookingFor}:</div>
+              <div className="jc-looking">{T.lookingFor}:</div>
               <div className="jc-desc">{post.description}</div>
 
               {post.quantity && (
-                <div className="jc-qty">📦 {T.qty}: <strong>{post.quantity}</strong></div>
+                <div className="jc-qty">{T.qty}: <strong>{post.quantity}</strong></div>
               )}
 
               <div className="jc-footer">

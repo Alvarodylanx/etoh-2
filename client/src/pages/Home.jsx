@@ -53,7 +53,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="hero-cities">
-          {REGIONS.slice(0, 5).map(c => <span key={c} className="city-pill">📍 {c}</span>)}
+          {REGIONS.slice(0, 5).map(c => <span key={c} className="city-pill">{c}</span>)}
         </div>
       </div>
 
@@ -70,14 +70,14 @@ export default function Home() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', flexWrap: 'wrap', gap: '12px' }}>
           <div style={{ display: 'flex', gap: '4px', borderBottom: '2px solid var(--border)' }}>
             <button className={`tab-btn ${tab === 'products' ? 'active' : ''}`} onClick={() => setTab('products')}>
-              🛍️ {t('productsTab')} ({filteredProducts.length})
+              {t('productsTab')} ({filteredProducts.length})
             </button>
             <button className={`tab-btn ${tab === 'stands' ? 'active' : ''}`} onClick={() => setTab('stands')}>
-              🏪 {t('standsTab')} ({filteredStands.length})
+              {t('standsTab')} ({filteredStands.length})
             </button>
           </div>
           <div className="search-bar">
-            <span className="search-bar-icon">🔍</span>
+            <span className="search-bar-icon">⌕</span>
             <input placeholder="Search products, vendors..." value={search} onChange={e => setSearch(e.target.value)} />
             {search && <button onClick={() => setSearch('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '1rem' }}>✕</button>}
           </div>
@@ -89,7 +89,7 @@ export default function Home() {
           <div className="cat-bar">
             <button className={`cat-chip ${activeRegion === 'all' ? 'active' : ''}`} onClick={() => setRegion('all')}>{t('allCities')}</button>
             {REGIONS.map(r => (
-              <button key={r} className={`cat-chip ${activeRegion === r ? 'active' : ''}`} onClick={() => setRegion(r)}>📍 {r}</button>
+              <button key={r} className={`cat-chip ${activeRegion === r ? 'active' : ''}`} onClick={() => setRegion(r)}>{r}</button>
             ))}
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function Home() {
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px', alignItems: 'center' }}>
             <span style={{ fontSize: '.82rem', color: 'var(--text-muted)' }}>{t('showing')}</span>
             {activeRegion !== 'all' && (
-              <span className="stand-badge" style={{ cursor: 'pointer' }} onClick={() => setRegion('all')}>📍 {activeRegion} ✕</span>
+              <span className="stand-badge" style={{ cursor: 'pointer' }} onClick={() => setRegion('all')}>{activeRegion} ✕</span>
             )}
             {activeCategory !== 'all' && tab === 'products' && (
               <span className="stand-badge" style={{ cursor: 'pointer' }} onClick={() => setCategory('all')}>
@@ -132,7 +132,6 @@ export default function Home() {
         ) : tab === 'products' ? (
           filteredProducts.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">🛒</div>
               <h3>{t('noProductsMatch')}</h3>
               <p>{t('tryDifferent')}</p>
               <button className="btn btn-outline" style={{ marginTop: '16px' }} onClick={() => { setRegion('all'); setCategory('all'); setSearch(''); }}>
@@ -147,7 +146,7 @@ export default function Home() {
         ) : (
           filteredStands.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">🏪</div>
+              <div className="empty-state-icon" style={{ fontSize: '2.5rem', color: 'var(--border)' }}>◫</div>
               <h3>{t('noStandsArea')}</h3>
               <p>{t('tryDifferentCity')}</p>
             </div>
@@ -155,7 +154,7 @@ export default function Home() {
             <div className="grid grid-3">
               {filteredStands.map(s => (
                 <Link key={s.id} to={`/stands/${s.id}`} className="card stand-card">
-                  <div className="stand-banner">🏪</div>
+                  <div className="stand-banner" style={{ background: 'linear-gradient(135deg,var(--primary-light),#FDE68A)', fontSize: '1rem', fontWeight: 800, color: 'var(--primary-dark)', letterSpacing: '.5px' }}>STAND</div>
                   <div className="stand-info">
                     <div className="stand-name" style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       {s.vendor_name}
@@ -166,8 +165,8 @@ export default function Home() {
                     </div>
                     <div className="stand-desc">{s.stand_description || 'Welcome to my stand!'}</div>
                     <div className="stand-meta">
-                      {s.city && <span className="stand-badge">📍 {s.city}</span>}
-                      <span className="stand-badge">📅 {new Date(s.creation_date).toLocaleDateString()}</span>
+                      {s.city && <span className="stand-badge">{s.city}</span>}
+                      <span className="stand-badge">{new Date(s.creation_date).toLocaleDateString()}</span>
                     </div>
                   </div>
                 </Link>

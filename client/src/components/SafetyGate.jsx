@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 const RULES = [
-  { icon: '🚫', text: 'Never send mobile money or cash before physically inspecting and receiving the goods.' },
-  { icon: '📍', text: 'Always arrange meetings at busy public places — near a petrol station, church, bakery, or bank.' },
-  { icon: '📱', text: 'Double-check all payment confirmation SMS codes carefully. Ignore any link sent by strangers.' },
+  { icon: '–', text: 'Never send mobile money or cash before physically inspecting and receiving the goods.' },
+  { icon: '–', text: 'Always arrange meetings at busy public places — near a petrol station, church, bakery, or bank.' },
+  { icon: '–', text: 'Double-check all payment confirmation SMS codes carefully. Ignore any link sent by strangers.' },
 ];
 
 export default function SafetyGate({ phone, vendorName, onClose }) {
@@ -17,7 +17,7 @@ export default function SafetyGate({ phone, vendorName, onClose }) {
   return (
     <div className="overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="safety-modal">
-        <h2>⚠️ Before You Contact the Seller</h2>
+        <h2>Before You Contact the Seller</h2>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '14px' }}>
           Read these safety rules carefully before revealing <strong>{vendorName}'s</strong> contact.
         </p>
@@ -57,7 +57,7 @@ export default function SafetyGate({ phone, vendorName, onClose }) {
           </>
         ) : (
           <div className="contact-reveal">
-            <div className="contact-label">📞 {vendorName}'s Contact</div>
+            <div className="contact-label">Contact — {vendorName}</div>
             <div className="contact-number">{phone}</div>
             <div className="contact-label" style={{ marginTop: '8px' }}>
               Stay safe — meet in public, inspect before paying.

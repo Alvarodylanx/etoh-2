@@ -54,27 +54,27 @@ export default function StandDetail() {
 
       <div className="card" style={{ marginBottom: '28px' }}>
         <div style={{ background: 'linear-gradient(135deg,var(--primary-light),#FDE68A)', padding: '32px 28px', display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
-          <div style={{ fontSize: '4rem', animation: 'float 3s ease-in-out infinite' }}>🏪</div>
+          <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'white', fontWeight: 900, fontSize: '1.6rem' }}>{stand.vendor_name.charAt(0).toUpperCase()}</div>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '6px' }}>
               <h1 style={{ fontSize: '1.6rem', fontWeight: 900 }}>{stand.vendor_name}</h1>
               {isOwner && <span className="owner-badge">{t('yourStand')}</span>}
-              {stand.is_verified ? <span className="vendor-verified">🦁 {t('trustedVendor')}</span> : null}
+              {stand.is_verified ? <span className="vendor-verified">✔ {t('trustedVendor')}</span> : null}
             </div>
             <div style={{ marginBottom: 10 }}>
               <AvailabilityBadge availability={avail} size="lg" />
             </div>
             <p style={{ color: 'var(--text-muted)', marginBottom: '12px' }}>{stand.stand_description || 'Welcome to my ETOH stand!'}</p>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <span className="stand-badge">📅 {new Date(stand.creation_date).toLocaleDateString()}</span>
-              <span className="stand-badge">🛍️ {products.length} product{products.length !== 1 ? 's' : ''}</span>
+              <span className="stand-badge">{new Date(stand.creation_date).toLocaleDateString()}</span>
+              <span className="stand-badge">{products.length} product{products.length !== 1 ? 's' : ''}</span>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '160px' }}>
             <button className="btn btn-red" onClick={() => setShowGate(true)}>{t('contactSeller')}</button>
             <button className="whatsapp-btn" style={{ padding: '10px 16px', fontSize: '.88rem', animation: 'waPulse 2.5s infinite' }} onClick={() => setShowWA(true)}>
-              <span className="wa-logo">📱</span> WhatsApp
+              WhatsApp
             </button>
             {isOwner && (
               <>
@@ -96,7 +96,7 @@ export default function StandDetail() {
 
       {products.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">📦</div>
+          <div className="empty-state-icon" style={{ fontSize: '2rem', color: 'var(--border)' }}>□</div>
           <h3>{t('noProductsYet')}</h3>
           {isOwner && <Link to={`/stands/${id}/add-product`} className="btn btn-primary" style={{ marginTop: '16px' }}>{t('addFirstProduct')}</Link>}
         </div>
@@ -107,7 +107,7 @@ export default function StandDetail() {
               <ProductCard product={{ ...p, vendor_name: stand.vendor_name, is_verified: stand.is_verified }} />
               {isOwner && (
                 <button className="product-delete-btn" onClick={() => handleDeleteProduct(p)} disabled={deletingId === p.id}>
-                  {deletingId === p.id ? '…' : '🗑️'}
+                  {deletingId === p.id ? '…' : '×'}
                 </button>
               )}
             </div>
